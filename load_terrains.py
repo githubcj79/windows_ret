@@ -82,5 +82,6 @@ if __name__ == '__main__':
     now_ = datetime.datetime.now()
     day_before = now_  - datetime.timedelta(days=1)
     when_ = day_before
+    when_ = now_
 
     df = load_terrains(time_=when_)

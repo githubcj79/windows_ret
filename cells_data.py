@@ -11,7 +11,7 @@ from settings import (
     )
 
 def cells_data(time_=None):
-    logger.debug(f'ENV {ENV}')
+    logger.debug(f'ENV {ENV} time_ {time_}')
 
     if not time_:
         logger.info(f'time_ {time_}')
@@ -19,6 +19,7 @@ def cells_data(time_=None):
 
     when_ = time_
     period = when_.strftime("%Y-%m-%d")
+    logger.debug(f'period {period}')
 
     query_ = f'''
     select distinct * from lcellreference as l
