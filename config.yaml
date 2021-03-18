@@ -60,3 +60,8 @@ KAFKA_CLIENT:
         sim: test_nbi_res_simu
         prod: test_nbi_res_simu # sólo para pruebas
         # prod: rst_topic # valor válido
+
+# From C:\software\huawei_nbi_simu\simulator\.env
+# MML_TOPIC=test_nbi_mml_simu
+# RES_TOPIC=test_nbi_res_simu
+# KAFKA_BROKER_URL=localhost:9092

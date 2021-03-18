@@ -110,7 +110,8 @@ def evaluator(time_=None, candidates_kpis_df=pd.DataFrame()):
                         subunitno = antenna.subunitno,
                         tilt_initial = antenna.tilt,
 
-                        oldtilt = tilt_initial,
+                        # oldtilt = tilt_initial,
+                        oldtilt = antenna.tilt,
 
                         # originalmente
                         # user_thrp_dl_initial = user_thrp_dl,

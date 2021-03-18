@@ -36,7 +36,8 @@ def average_kpis(time_=None):
     if ENV == 'sim':
         dict_ = {
                     'eNodeB_Name': ['MBTS-AIS_3G_003', 'MBTS-ARA_3G_013',],
-                    'cellname': ['AIS_4G_003_3', 'ARA_4G_013_3',],
+                    # 'cellname': ['AIS_4G_003_3', 'ARA_4G_013_3',],
+                    'Cell_Name': ['AIS_4G_003_3', 'ARA_4G_013_3',],
                     'user_avg': [81.0, 200.0,],
                     'user_thrp_dl': [25.4, 23.2,],
                     'traffic_dl': [8285.170, 7660.760],
