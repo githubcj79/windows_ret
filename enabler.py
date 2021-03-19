@@ -25,7 +25,7 @@ def enabler(cellnames=None):
         for antenna in antennas:
             antenna.enabled = True
             # logger.info(f'node {antenna.node} deviceno {antenna.deviceno}')
-            session.commit()
+            # session.commit()
 
     session.commit()
     session.close()

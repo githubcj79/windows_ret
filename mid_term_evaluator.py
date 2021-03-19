@@ -27,10 +27,12 @@ def mid_term_evaluator(time_=None, candidates_df=pd.DataFrame()):
     l = ['eNodeB_Name', 'cellname', 'user_avg', 'user_thrp_dl', 'traffic_dl',]
     candidates_kpis_df = pd.merge(candidates_df, kpis_df, how="inner", left_on='cellname', right_on='Cell_Name')[l].drop_duplicates()
 
+    # logger.warning(f"evaluator() comentado. Sólo para conocer qué celdas generan transacciones.")
     evaluator(time_=time_, candidates_kpis_df=candidates_kpis_df)
 
     # Idea Executor < -- > NBI : podría ser un proceso independiente
     # - tengo q revisar q retorna el NBI
     # actualiza tablas transactions y rets (nuevo tilt)
 
-    processor(time_=time_)
+    logger.warning(f"processor() comentado. Sólo para conocer qué celdas generan transacciones.")
+    # processor(time_=time_)
