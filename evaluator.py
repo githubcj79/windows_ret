@@ -102,6 +102,9 @@ def evaluator(time_=None, candidates_kpis_df=pd.DataFrame()):
                 if not (user_avg >= MIN_USER_AVG and user_avg <= MAX_USER_AVG):
                     logger.debug(f"continue: user_avg {user_avg}")
                     continue
+                if antenna.tilt == newtilt(antenna.tilt):
+                    logger.debug(f"continue: antenna.tilt == newtilt(antenna.tilt)")
+                    continue
                 # se crea entrada en tabla transactions
                 trx = Transaction(
                         node = antenna.node,
