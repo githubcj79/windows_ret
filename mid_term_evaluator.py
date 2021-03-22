@@ -34,5 +34,5 @@ def mid_term_evaluator(time_=None, candidates_df=pd.DataFrame()):
     # - tengo q revisar q retorna el NBI
     # actualiza tablas transactions y rets (nuevo tilt)
 
-    logger.warning(f"processor() comentado. Sólo para conocer qué celdas generan transacciones.")
-    # processor(time_=time_)
+    # logger.warning(f"processor() comentado. Sólo para conocer qué celdas generan transacciones.")
+    processor(time_=time_)
