@@ -34,6 +34,7 @@ def all_enabler(time_=None):
 def main():
     time_ = datetime.datetime.now()
     day_before = time_  - datetime.timedelta(days=1)
+    all_enabler(time_=time_)
     all_enabler(time_=day_before)
 
 

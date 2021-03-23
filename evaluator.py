@@ -24,7 +24,7 @@ from tables import (
     )
 
 def newtilt(tilt=None):
-    # logger.debug(f"tilt {tilt}")
+    logger.debug(f"tilt {tilt}")
 
     if not tilt:
         return
@@ -32,7 +32,7 @@ def newtilt(tilt=None):
     return tilt + DELTA_TILT if tilt + DELTA_TILT < MAX_TILT else tilt
 
 def delta_percentaje(reference=None, value=None):
-    # logger.debug(f"reference {reference} value {value}")
+    logger.debug(f"reference {reference} value {value}")
 
     if not reference or not value:
         return
@@ -71,14 +71,14 @@ def evaluator(time_=None, candidates_kpis_df=pd.DataFrame()):
         for antenna in antennas:
             if not antenna.enabled:
                 continue
-            # logger.debug(f"node {antenna.node} deviceno {antenna.deviceno}")
+            logger.debug(f"node {antenna.node} deviceno {antenna.deviceno}")
             trx = session.query(Transaction).filter(
                 and_(Transaction.node==antenna.node,
                     Transaction.deviceno==antenna.deviceno)).first()
             if trx:
                 # si trx anterior no fue exitosa
                 if not trx.success:
-                    # logger.debug(f"continue: success {trx.success}")
+                    logger.debug(f"continue: success {trx.success}")
                     continue
                 cond_ = delta_percentaje(
                     trx.user_thrp_dl_initial, user_thrp_dl) > MAX_DELTA_USER_THRP_DL_PERCENTAJE
@@ -86,13 +86,13 @@ def evaluator(time_=None, candidates_kpis_df=pd.DataFrame()):
                         trx.traffic_dl_initial, traffic_dl) > MAX_DELTA_TRAFFIC_DL_PERCENTAJE
                 if cond_:
                     # rollback
-                    # logger.debug(f"rollback")
+                    logger.debug(f"rollback")
                     newtilt_  = trx.oldtilt
                 else:
                     newtilt_ = newtilt(trx.newtilt)
 
                 if trx.newtilt == newtilt_:
-                    # logger.debug(f"continue: newtilt_ {newtilt_}")
+                    logger.debug(f"continue: newtilt_ {newtilt_}")
                     continue
 
                 # si nuevo tilt es distinto al último
@@ -100,10 +100,10 @@ def evaluator(time_=None, candidates_kpis_df=pd.DataFrame()):
                 trx.generated = datetime.now()
             else:
                 if not (user_avg >= MIN_USER_AVG and user_avg <= MAX_USER_AVG):
-                    # logger.debug(f"continue: user_avg {user_avg}")
+                    logger.debug(f"continue: user_avg {user_avg}")
                     continue
                 if antenna.tilt == newtilt(antenna.tilt):
-                    # logger.debug(f"continue: antenna.tilt == newtilt(antenna.tilt)")
+                    logger.debug(f"continue: antenna.tilt == newtilt(antenna.tilt)")
                     continue
                 # se crea entrada en tabla transactions
                 trx = Transaction(
@@ -128,7 +128,7 @@ def evaluator(time_=None, candidates_kpis_df=pd.DataFrame()):
                         datetimeid = time_,
                         generated = datetime.now(),
                         )
-                # logger.debug(f"trx \n{trx}")
+                logger.debug(f"trx \n{trx}")
                 session.add(trx)
             session.commit()
 

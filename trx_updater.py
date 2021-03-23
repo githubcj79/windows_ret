@@ -63,6 +63,7 @@ def trx_updater(commands=None, sent_=None):
 
     for command in commands:
         result = command['data']['result']
+        logger.debug(f"result {result}")
         executed_time_stamp_str = command['data']['executed_time_stamp']
         executed_time_stamp = datetime.datetime.strptime(
                             executed_time_stamp_str, '%Y-%m-%d %H:%M:%S')
@@ -81,6 +82,7 @@ def trx_updater(commands=None, sent_=None):
             ret_updater(node=trx.node, deviceno=trx.deviceno,
                         tilt=trx.newtilt, session=session)
         else:
+            logger.info(f"result {result}")
             trx.failure = executed_time_stamp
 
     session.commit()
