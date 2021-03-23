@@ -21,12 +21,13 @@ def scheduler(time_=None):
     engine = get_engine()
     db_connection = engine.connect()
 
-    # set más reciente de overshooters en terreno plano
+    # set más reciente de 'High' overshooters en terreno plano
     query_ = '''
             select o.cellname
             from overshooters o, terrains t
             where o.cellname = t.cellname
                 and o.overshooter and t.is_plain
+                and o.intensity = 'High'
                 and o.datetimeid = (select max(datetimeid) from overshooters)
                 and t.datetimeid = (select max(datetimeid) from terrains);
             '''
